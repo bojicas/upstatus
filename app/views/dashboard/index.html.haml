@@ -1,0 +1,18 @@
+%h1 UP Status Dashboard
+
+%h3 Status:
+
+%ul
+  - @services.each do |service|
+    %li
+      = service.title
+
+%hr
+
+
+%h3 Services description:
+
+%ul
+  - @services.each do |service|
+    %li
+      = "#{service.title} #{service.description}"
