@@ -15,4 +15,7 @@
 %ul
   - @services.each do |service|
     %li
-      = "#{service.title} #{service.description}"
+      = service.title
+      %ul
+        %li
+          = service.description
