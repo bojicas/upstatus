@@ -126,20 +126,63 @@ describe ServicesController do
         @service = mock_model(Service)
         Service.stub!(:find).with("1").and_return(@service)
       end
+      def do_get
+        get :edit, :id => "1"
+      end
 
       it "renders new template" do
-        get :edit, :id => "1"
+        do_get
         response.should render_template(:edit)
       end
       it "intializes service with found record" do
         Service.should_receive(:find).with("1").and_return(@service)
-        get :edit, :id => "1"
+        do_get
       end
       it "assigns service for the view" do
-        get :edit, :id => "1"
+        do_get
         assigns[:service].should == @service
       end
     end
 
+    describe "POST 'update'" do
+      before do
+        @service = mock_model(Service, :update_attributes => true)
+        Service.stub!(:find).with("1").and_return(@service)
+      end
+
+      it "updates a service" do
+        Service.should_receive(:find).with("1").and_return(@service)
+        post :update, :id => "1", :service => { 
+          "title" => "cubicleapps.com", 
+          "description" => "Main web service" 
+        }
+      end
+      context "when the service saves successfully" do
+        before do
+          @service.stub(:update_attributes).and_return(true)
+        end
+        it "sets a flash[:notice] message" do
+          post :update, :id => "1"
+          flash[:notice].should eq("The service was updated successfully.")
+        end
+        it "redirects to Services index" do
+          post :update, :id => "1"
+          response.should redirect_to(:action => :index)
+        end
+      end
+      context "when the service fails to save" do
+        before do
+          @service.stub(:update_attributes).and_return(false)
+        end
+        it "assigns @service for the edit view" do
+          post :update, :id => "1"
+          assigns[:service].should eq(@service)
+        end
+        it "renders the edit template" do
+          post :update, :id => "1"
+          response.should render_template(:edit)
+        end
+      end
+    end
   end
 end

@@ -23,4 +23,14 @@ class ServicesController < ApplicationController
   def edit
     @service = Service.find(params[:id])
   end
+
+  def update
+    @service = Service.find(params[:id])
+    if @service.update_attributes(params[:service])
+      flash[:notice] = "The service was updated successfully."
+      redirect_to :action => :index
+    else
+      render :action => :edit
+    end
+  end
 end
