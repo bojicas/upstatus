@@ -14,7 +14,12 @@
 
     - if admin_signed_in?
       %div.admin_link_bar
-        ="Signed in as #{current_admin.email}. Not you?"
-        = link_to 'Sign out', destroy_admin_session_path
+        %ul
+          %li
+            = link_to 'Services', '/'
+          %li
+            ="Signed in as #{current_admin.email}. Not you?"
+          %li
+            = link_to 'Sign out', destroy_admin_session_path
 
     = yield

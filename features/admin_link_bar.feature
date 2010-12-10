@@ -5,4 +5,5 @@ Feature: Admnin link bar
 
     Scenario: Display link bar
         Given an authenticated admin
-        Then I should see "Sign out" within "a"
+        Then I should see "Services"
+        And I should see "Sign out"
