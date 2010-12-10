@@ -1,26 +1,6 @@
 %h3 New Service
 
-=form_for(@service) do |f|
-  -if @service.errors.any?
-    %div#errorExplanation
-      %h3 #{pluralize(@service.errors.count, "error")} prohibited this service from being saved:
-    %ul
-      -@service.errors.full_messages.each do |msg|
-        %li
-          =msg
+=render :partial => 'form'
 
-  %div.label
-    =f.label :title
-  %div.filed
-    =f.text_field :title
-
-  %div.label
-    =f.label :description
-  %div.field
-    =f.text_area :description, :rows => 3
-
-  %div#submit
-    = f.submit
-
-  %p
-    =link_to "Back", services_path
+%p
+  =link_to "Back", services_path
