@@ -5,8 +5,7 @@ body {
 
 .up_status {
   width: 750px;
-  margin: auto;
-  margin-top: 1em;
+  margin: 1em auto auto auto;
   color: white;
 }
 .content, .admin_link_bar, .notice, .alert {

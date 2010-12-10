@@ -20,6 +20,9 @@
       %div.admin_link_bar
         %ul
           %li
+            =link_to "Dashboard", root_path
+          %li
+            *
             =link_to 'Services', services_path
           %li
             ="* Signed in as #{current_admin.email}. Not you?"
