@@ -3,9 +3,9 @@ require 'spec_helper'
 describe ServicesController do
 
   describe "access control" do
-    [:index, :new, :create].each do |action|
+    [:index, :new, :create, :edit].each do |action|
       it "requires admin to be logged in for action #{action}" do
-        get action
+        get action, :id => 1
         flash[:alert].should == "You need to sign in or sign up before continuing."
         response.should redirect_to(new_admin_session_path)
       end
@@ -92,7 +92,6 @@ describe ServicesController do
           "description" => "Main application site" 
         }
       end
-
       context "when the service saves successfully" do
         before do
           @service.stub(:save).and_return(true)
@@ -106,7 +105,6 @@ describe ServicesController do
           response.should redirect_to(:action => :index)
         end
       end
-
       context "when the service fails to save" do
         before do
           @service.stub(:save).and_return(false)
@@ -120,9 +118,28 @@ describe ServicesController do
           response.should render_template(:new)
         end
       end
-      
+    end
+
+
+    describe "GET 'edit'" do
+      before do
+        @service = mock_model(Service)
+        Service.stub!(:find).with("1").and_return(@service)
+      end
+
+      it "renders new template" do
+        get :edit, :id => "1"
+        response.should render_template(:edit)
+      end
+      it "intializes service with found record" do
+        Service.should_receive(:find).with("1").and_return(@service)
+        get :edit, :id => "1"
+      end
+      it "assigns service for the view" do
+        get :edit, :id => "1"
+        assigns[:service].should == @service
+      end
     end
 
   end
-
 end

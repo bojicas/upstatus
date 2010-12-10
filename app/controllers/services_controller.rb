@@ -19,4 +19,8 @@ class ServicesController < ApplicationController
       render :action => :new
     end
   end
+
+  def edit
+    @service = Service.find(params[:id])
+  end
 end
