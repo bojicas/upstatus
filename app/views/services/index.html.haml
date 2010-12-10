@@ -1,3 +1,14 @@
 %h3 Services List
 
+%ul
+  - @services.each do |service|
+    %li
+      =service.title
+      =link_to "Edit", edit_service_path(service)
+      =link_to 'Destroy', service, :confirm => 'Are you sure?', :method => :delete
+      %ul
+        %li
+          =service.description
 
+%p
+  =link_to "New Service", new_service_path
