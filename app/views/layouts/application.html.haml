@@ -11,4 +11,10 @@
       = notice
     %p.alert
       = alert
+
+    - if admin_signed_in?
+      %div.admin_link_bar
+        ="Signed in as #{current_admin.email}. Not you?"
+        = link_to 'Sign out', destroy_admin_session_path
+
     = yield
