@@ -2,24 +2,29 @@
 %html
   %head
     %title UP Status
-    = stylesheet_link_tag :all
-    = javascript_include_tag :defaults
-    = csrf_meta_tag
+    =stylesheet_link_tag :all
+    =javascript_include_tag :defaults
+    =csrf_meta_tag
 
   %body
-    %p.notice
-      = notice
-    %p.alert
-      = alert
+    %h1.up_status UP Status
+
+    -if notice
+      %div.notice
+        =notice
+    -if alert
+      %div.alert
+        =alert
 
     - if admin_signed_in?
       %div.admin_link_bar
         %ul
           %li
-            = link_to 'Services', services_path
+            =link_to 'Services', services_path
           %li
             ="Signed in as #{current_admin.email}. Not you?"
           %li
-            = link_to 'Sign out', destroy_admin_session_path
+            =link_to 'Sign out', destroy_admin_session_path
 
-    = yield
+    %div.content
+      =yield

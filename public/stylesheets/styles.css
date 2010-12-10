@@ -1,0 +1,41 @@
+body {
+  font-family: verdana, arial, helvetica, sans-serif;
+  background-color: #2371a5;
+}
+
+.up_status {
+  width: 750px;
+  margin: auto;
+  margin-top: 1em;
+  color: white;
+}
+.content, .admin_link_bar, .notice, .alert {
+  margin: 2em auto auto auto;
+  padding: 1em;
+  width: 750px;
+  background-color: #f8f8ff;
+  border: solid #0b3c5f 3px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.admin_link_bar ul {
+  margin: 0;
+  padding: 1em;
+}
+
+.admin_link_bar li {
+  display: inline;
+  list-style-type: none;
+}
+
+.notice {
+  color: green;
+  text-align: center;
+}
+
+.alert {
+  color: orange;
+  text-align: center;
+}
