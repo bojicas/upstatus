@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DashboardController do
+describe ServicesController do
 
   describe "GET 'index'" do
 
@@ -28,9 +28,9 @@ describe DashboardController do
       do_get
     end
 
-    it "should assign found services for the view" do
+    it "should be successful" do
       do_get
-      assigns[:services].should == @services
+      response.should be_success
     end
   end
 
