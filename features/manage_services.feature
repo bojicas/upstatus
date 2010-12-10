@@ -15,9 +15,21 @@ Feature: Manage services
 
     Scenario: Create a service
         Given an authenticated admin
-        And I go to the services index page
+        And I am on the services index page
         When I follow "New Service"
-        And I fill in "title" with "cubicleapps.com - main"
-        And I fill in "description" with "Main application site"
-        And I press "Create"
-        Then I should see "Service was successfully created."
+        And I fill in "service[title]" with "cubicleapps.com - main"
+        And I fill in "service[description]" with "Main application site"
+        And I press "Create Service"
+        Then I should see "The service was created successfully."
+
+    Scenario: Display errors for invalid data in new form
+        Given an authenticated admin
+        And I am on the services index page
+        When I follow "New Service"
+        And I fill in "service[title]" with ""
+        And I fill in "service[description]" with "Main application site"
+        And I press "Create Service"
+        Then I should see "New Service" 
+        And I should see "1 error prohibited this service from being saved:"
+        And I should see "Title can't be blank"
+

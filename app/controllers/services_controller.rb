@@ -10,4 +10,13 @@ class ServicesController < ApplicationController
     @service = Service.new
   end
 
+  def create
+    @service = Service.new(params[:service])
+    if @service.save
+      flash[:notice] = "The service was created successfully."
+      redirect_to :action => :index
+    else
+      render :action => :new
+    end
+  end
 end

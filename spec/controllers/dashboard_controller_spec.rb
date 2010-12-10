@@ -13,22 +13,22 @@ describe DashboardController do
       get 'index'
     end
 
-    it "should be successful" do
+    it "is successful" do
       do_get
       response.should be_success
     end
 
-    it "should render index template" do
+    it "renders index template" do
       do_get
       response.should render_template(:index)
     end
 
-    it "should find all services" do
+    it "finds all services" do
       Service.should_receive(:all).and_return(@services)
       do_get
     end
 
-    it "should assign found services for the view" do
+    it "assigns found services for the view" do
       do_get
       assigns[:services].should == @services
     end
