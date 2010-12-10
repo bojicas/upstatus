@@ -11,6 +11,9 @@ module NavigationHelpers
     when /the dashboard page/
       '/'
 
+    when /the sign up page/
+      '/admins/sign_up'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

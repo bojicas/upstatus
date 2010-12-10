@@ -9,6 +9,13 @@ Feature: Dashboard
         Then I should see "You should sign up for an admim account:"
         And I should see "sign up form" within "a"
 
+#    Scenario: Hide sign up form link when there are admin records
+#        Given a newly created admin
+#        When I go to the dashboard page
+#        Then I should not see "You should sign up for an admim account:"
+#        And I should not see "sign up form" within "a"
+#
+
     Scenario: List services
         Given a service with title "cubicleapps.com - main" and description "Main application site"
         When I go to the dashboard page
