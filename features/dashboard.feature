@@ -6,7 +6,8 @@ Feature: Dashboard
     Scenario: Recommend sign-up if no admin records
         Given no admins
         When I go to the dashboard page
-        Then I should see "You should sign up for an admim account"
+        Then I should see "You should sign up for an admim account:"
+        And I should see "sign up form" within "a"
 
     Scenario: List services
         Given a service with title "cubicleapps.com - main" and description "Main application site"

@@ -8,4 +8,8 @@ class Admin < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation
+
+  def self.should_register
+    self.count == 0 ? true : false
+  end
 end
