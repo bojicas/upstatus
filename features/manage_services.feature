@@ -19,6 +19,7 @@ Feature: Manage services
         When I follow "New Service"
         And I fill in "service[title]" with "cubicleapps.com - main"
         And I fill in "service[description]" with "Main application site"
+        And I should see "Back"
         And I press "Create Service"
         Then I should see "The service was created successfully."
 
