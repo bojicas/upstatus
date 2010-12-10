@@ -1,3 +1,7 @@
+Given /^no admins$/ do
+  Admin.delete_all
+end
+
 Given /^a service with title "([^"]*)" and description "([^"]*)"$/ do |title, description|
   Service.create(:title => title, :description => description)
 end
