@@ -3,7 +3,7 @@ require 'spec_helper'
 describe IssuesController do
 
   describe "access control" do
-    [:new].each do |action|
+    [:new, :create].each do |action|
       it "requires admin to be logged in for action #{action}" do
         get action, :id => 1
         flash[:alert].should == "You need to sign in or sign up before continuing."
@@ -75,6 +75,58 @@ describe IssuesController do
         assigns[:issue].should == @issue
       end
     end
+
+    describe "POST 'create'" do
+      before do
+        Service.create(
+          :id => "1",
+          :title => "cubicleapps.com - main" 
+        ) 
+        @issue = mock_model(Issue).as_null_object
+        Issue.stub(:new).and_return(@issue)
+      end
+
+      it "creates a new issue" do
+
+        Issue.should_receive(:new).with(
+          "service_id" => "1",
+          "title" => "Hardware Failure", 
+          "resolved" => false
+        ).and_return(@issue) 
+        post :create, :issue => { 
+          "service_id" => "1",
+          "title" => "Hardware Failure", 
+          "resolved" => false
+        }
+      end
+      context "when the issue saves successfully" do
+        before do
+          @issue.stub(:save).and_return(true)
+        end
+        it "sets a flash[:notice] message" do
+          post :create
+          flash[:notice].should eq("The issue was created successfully.")
+        end
+        it "redirects to Issues index" do
+          post :create
+          response.should redirect_to(:action => :index)
+        end
+      end
+      context "when the issue fails to save" do
+        before do
+          @issue.stub(:save).and_return(false)
+        end
+        it "assigns @issue for the new view" do
+          post :create
+          assigns[:issue].should eq(@issue)
+        end
+        it "renders the new template" do
+          post :create
+          response.should render_template(:new)
+        end
+      end
+    end
+
                            
   end
 end

@@ -8,4 +8,14 @@ class IssuesController < ApplicationController
   def new
     @issue = Issue.new
   end
+
+  def create
+    @issue = Issue.new(params[:issue])
+    if @issue.save
+      flash[:notice] = "The issue was created successfully."
+      redirect_to :action => :index
+    else
+      render :action => "new"
+    end
+  end
 end

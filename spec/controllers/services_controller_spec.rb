@@ -185,7 +185,7 @@ describe ServicesController do
       end
     end
 
-    describe "DELETE 'destrou'" do
+    describe "DELETE 'destroy'" do
       before do
         @service = mock_model(Service)
         Service.stub!(:find).with("1").and_return(@service)

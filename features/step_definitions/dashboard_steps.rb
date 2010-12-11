@@ -3,7 +3,7 @@ Given /^no admins$/ do
 end
 
 Given /^a service with title "([^"]*)" and description "([^"]*)"$/ do |title, description|
-  Service.create(:title => title, :description => description)
+  Service.create(:id => 1, :title => title, :description => description)
 end
 
 Given /^following services$/ do |table|
@@ -17,7 +17,14 @@ Given /^no pending issues$/ do
 end
 
 Given /^a current issue "([^"]*)" with severity status "([^"]*)" for "([^"]*)"$/ do |issue, severity, service|
-  Issue.create(:service_id => Service.where(:title => service).first.id, :title => issue, :severity => severity, :resolved => false)
+  Issue.create(
+    :service_id => Service.where(:title => service).first.id, 
+    :title => issue, 
+    :severity => severity, 
+    :resolved => false,
+    :time_down => DateTime.now - 2.hours,
+    :time_up => DateTime.now
+  )
 end
 
 Given /^a number of "([^"]*)" pending issues$/ do |pending_issues|

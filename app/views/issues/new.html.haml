@@ -1,1 +1,55 @@
 %h3 New Issue
+
+=form_for(@issue) do |f|
+  -if @issue.errors.any?
+    %div#errorExplanation
+      %h3 #{pluralize(@issue.errors.count, "error")} prohibited this issue from being saved:
+    %ul
+      -@issue.errors.full_messages.each do |msg|
+        %li
+          =msg
+
+  %div.label
+    =f.label :service_id
+  %div.filed
+    =f.select :service_id, Service.all.collect {|s| [ s.title, s.id ] }
+
+  %div.label
+    =f.label :title 
+  %div.field
+    =f.text_field :title
+
+  %div.label
+    =f.label :severity 
+  %div.field
+    =f.select :severity, Issue::SEVERITY
+
+  %div.label
+    =f.label :description 
+  %div.field
+    =f.text_area :description, :rows => 2
+    
+  %div.label
+    =f.label :time_down 
+  %div.field
+    =f.datetime_select :time_down
+
+  %div.label
+    =f.label :estimate 
+  %div.field
+    =f.text_field :estimate
+
+  %div.label
+    =f.label :resolved 
+  %div.field
+    =f.check_box :resolved
+
+  %div.label
+    =f.label :time_up 
+  %div.field
+    =f.datetime_select :time_up
+
+  %div#submit
+    = f.submit
+
+=link_to "Back", issues_path
