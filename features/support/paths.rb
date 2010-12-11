@@ -20,8 +20,11 @@ module NavigationHelpers
     when /the sign out page/
       '/admins/sign_out'
 
-    wheb /the services index page/
+    when /the services index page/
       services_path
+
+    when /the issues index page/
+      issues_path
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

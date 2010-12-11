@@ -21,7 +21,9 @@ Feature: Dashboard
         When I go to the dashboard page
         Then I should see "cubicleapps.com - main"
         And I should see "Main application site" 
-        And I should see "(UP)"
+        And I should see "(UP)" within ".green"
+        And I follow "History - Issues List"
+        Then I should see "Issues List"
 
     Scenario: List services status when current issues
         Given a service with title "cubicleapps.com - main" and description "Main application site"
@@ -29,12 +31,16 @@ Feature: Dashboard
         When I go to the dashboard page
         Then I should see "cubicleapps.com - main"
         And I should see "Main application site" 
-        And I should see "(DOWN - 1 issue)"
+        And I should see "(DOWN - 1 issue)" within ".red"
+        And I follow "History - Issues List"
+        Then I should see "Issues List"
 
     Scenario Outline: List services status (scenario outline version)
         Given a number of "<pending issues>" pending issues
         When I go to the dashboard page
-        And I should see "<status>"
+        Then I should see "<status>"
+        And I follow "History - Issues List"
+        Then I should see "Issues List"
 
         Examples:
             | pending issues | status            |

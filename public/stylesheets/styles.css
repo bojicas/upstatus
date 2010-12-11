@@ -25,6 +25,7 @@ body {
 }
 
 .admin_link_bar li {
+  font-size: 15px;
   display: inline;
   list-style-type: none;
 }
@@ -39,7 +40,10 @@ body {
   text-align: center;
 }
 
-#errorExplanation {
+.red, #errorExplanation {
   color: red;
 }
 
+.green {
+  color: green;
+}

@@ -10,7 +10,10 @@
   - @services.each do |service|
     %li
       = service.title
-      = status(service)
+      %span{:class => status_color(service)}
+        =status(service)
+
+=link_to "History - Issues List", issues_path
 
 %hr
 

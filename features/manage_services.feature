@@ -8,7 +8,7 @@ Feature: Manage services
 
     Scenario: List services and enable new, edit and destroy links
         Given a service with title "cubicleapps.com - main" and description "Main application site"
-        When I follow "Services" within ".admin_link_bar"
+        When I go to the services index page
         Then I should see "cubicleapps.com - main"
         And I should see "Edit"
         And I should see "Destroy"
@@ -40,6 +40,7 @@ Feature: Manage services
         Given a service with title "cubicleapps.com - main" and description "Main application site"
         And I am on the services index page
         When I follow "Edit cubicleapps.com - main"
+        #When I go to the "cubicleapps.com - main" edit service page
         Then I should see "Back"
         And I fill in "service[title]" with "cubicleapps.com"
         And I fill in "service[description]" with "Main web service"

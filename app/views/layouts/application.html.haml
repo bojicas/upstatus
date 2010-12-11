@@ -25,6 +25,9 @@
             *
             =link_to 'Services', services_path
           %li
+            *
+            =link_to 'Issues', issues_path
+          %li
             ="* Signed in as #{current_admin.email}. Not you?"
           %li
             =link_to 'Sign out', destroy_admin_session_path

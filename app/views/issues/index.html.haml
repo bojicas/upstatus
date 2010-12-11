@@ -1,0 +1,17 @@
+%h3 Issues List
+
+%ul
+  -@issues.each do |issue|
+    %li
+      %b
+        =issue.service.title
+        *
+        =issue.title
+      %ul
+        %li
+          ="Severity: #{issue.severity}"
+        %li
+          ="Resolved: #{issue.resolved}"
+          ="on #{issue.time_up}" if issue.resolved
+
+
