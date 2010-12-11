@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101210071225) do
+ActiveRecord::Schema.define(:version => 20101211055729) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -27,8 +27,21 @@ ActiveRecord::Schema.define(:version => 20101210071225) do
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
 
+  create_table "issues", :force => true do |t|
+    t.integer  "service_id",                     :null => false
+    t.string   "title",                          :null => false
+    t.integer  "severity",                       :null => false
+    t.text     "description"
+    t.datetime "time_down"
+    t.string   "estimate"
+    t.boolean  "resolved",    :default => false, :null => false
+    t.datetime "time_up"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "services", :force => true do |t|
-    t.string   "title"
+    t.string   "title",       :null => false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"

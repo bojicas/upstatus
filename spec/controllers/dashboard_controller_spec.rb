@@ -6,7 +6,9 @@ describe DashboardController do
 
     before do
       @services = mock_model(Service)
+      @current_issues = mock_model(Issue)
       Service.stub(:all).and_return(@services)
+      Issue.stub(:current_issues).and_return(@current_issues)
     end
 
     def do_get
@@ -28,9 +30,19 @@ describe DashboardController do
       do_get
     end
 
+    it "finds all current issues" do
+      Issue.should_receive(:current_issues).and_return(@current_issues)
+      do_get
+    end
+
     it "assigns found services for the view" do
       do_get
       assigns[:services].should == @services
+    end
+
+    it "assigns current issues for the view" do
+      do_get
+      assigns[:current_issues].should == @current_issues
     end
   end
 
