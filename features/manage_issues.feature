@@ -12,6 +12,8 @@ Feature: Manage issues
         And I should see "Severity: 4"
         And I should see "Resolved: false"
         And I should not see "New Issue"
+        And I follow "Back to Dashboard"
+        Then I should see "UP Status Dashboard"
 
     Scenario: Ensure New Issues Link on admin
         Given an authenticated admin
