@@ -9,28 +9,9 @@
   %body
     %h1.up_status UP Status
 
-    -if notice
-      %div.notice
-        =notice
-    -if alert
-      %div.alert
-        =alert
+    = render :partial => 'shared/flashes'
 
-    - if admin_signed_in?
-      %div.admin_link_bar
-        %ul
-          %li
-            =link_to "Dashboard", root_path
-          %li
-            *
-            =link_to 'Services', services_path
-          %li
-            *
-            =link_to 'Issues', issues_path
-          %li
-            ="* Signed in as #{current_admin.email}. Not you?"
-          %li
-            =link_to 'Sign out', destroy_admin_session_path
+    = render :partial => 'shared/admin_link_bar'
 
     %div.content
       =yield
