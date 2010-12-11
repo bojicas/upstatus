@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ServicesController do
 
   describe "access control" do
-    [:index, :new, :create, :edit, :update].each do |action|
+    [:index, :new, :create, :edit, :update, :destroy].each do |action|
       it "requires admin to be logged in for action #{action}" do
         get action, :id => 1
         flash[:alert].should == "You need to sign in or sign up before continuing."

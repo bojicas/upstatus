@@ -20,5 +20,4 @@ Feature: Manage issues
         When I go to the issues page
         And I follow "New Issue"
         Then I should see "New Issue"
-        And show me the page
 
