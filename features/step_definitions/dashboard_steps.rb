@@ -12,3 +12,7 @@ Given /^following services$/ do |table|
   end  
 end
 
+Given /^no pending issues$/ do
+  Issue.delete_all
+end
+

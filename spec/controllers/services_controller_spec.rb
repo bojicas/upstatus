@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ServicesController do
 
   describe "access control" do
-    [:index, :new, :create, :edit].each do |action|
+    [:index, :new, :create, :edit, :update].each do |action|
       it "requires admin to be logged in for action #{action}" do
         get action, :id => 1
         flash[:alert].should == "You need to sign in or sign up before continuing."
@@ -150,7 +150,7 @@ describe ServicesController do
         Service.stub!(:find).with("1").and_return(@service)
       end
 
-      it "updates a service" do
+      it "finds a service to update" do
         Service.should_receive(:find).with("1").and_return(@service)
         post :update, :id => "1", :service => { 
           "title" => "cubicleapps.com", 
@@ -182,6 +182,30 @@ describe ServicesController do
           post :update, :id => "1"
           response.should render_template(:edit)
         end
+      end
+    end
+
+    describe "DELETE 'destrou'" do
+      before do
+        @service = mock_model(Service)
+        Service.stub!(:find).with("1").and_return(@service)
+      end
+      
+      it "destroys the service" do
+        @service.should_receive(:destroy).and_return(true)
+        delete :destroy, :id => "1"
+      end
+      it "finds the service record to destroy" do
+        Service.should_receive(:find).with("1").and_return(@service)
+        delete :destroy, :id => "1"
+      end
+      it "redirects to Service index" do
+        delete :destroy, :id => "1"
+        response.should redirect_to(:action => :index)
+      end
+      it "set a flash[:notice] message" do
+        delete :destroy, :id => "1"
+        flash[:notice].should eq("The service was destroyed successfully.")
       end
     end
   end

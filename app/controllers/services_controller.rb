@@ -33,4 +33,11 @@ class ServicesController < ApplicationController
       render :action => :edit
     end
   end
+
+  def destroy
+    service = Service.find(params[:id])
+    service.destroy
+    redirect_to :action => :index
+    flash[:notice] = "The service was destroyed successfully."
+  end
 end

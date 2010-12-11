@@ -15,9 +15,11 @@ Feature: Dashboard
         Then I should not see "You should sign up for an admim account:"
         And I should not see "sign up form" within "a"
 
-
-    Scenario: List services
+    Scenario: List services when no issues
         Given a service with title "cubicleapps.com - main" and description "Main application site"
+        And no pending issues
         When I go to the dashboard page
         Then I should see "cubicleapps.com - main"
         And I should see "Main application site" 
+        And I should see "(UP)"
+

@@ -3,9 +3,11 @@ Feature: Manage services
     As an authenticated admin
     I want to view, create, edit or delete services
 
-    Scenario: List services and enable new, edit and destroy links
+    Background:
         Given an authenticated admin
-        And a service with title "cubicleapps.com - main" and description "Main application site"
+
+    Scenario: List services and enable new, edit and destroy links
+        Given a service with title "cubicleapps.com - main" and description "Main application site"
         When I follow "Services" within ".admin_link_bar"
         Then I should see "cubicleapps.com - main"
         And I should see "Edit"
@@ -14,8 +16,7 @@ Feature: Manage services
         And I should see "New Service"
 
     Scenario: Create a service
-        Given an authenticated admin
-        And I am on the services index page
+        Given I am on the services index page
         When I follow "New Service"
         Then I should see "Back"
         And I fill in "service[title]" with "cubicleapps.com - main"
@@ -26,8 +27,7 @@ Feature: Manage services
         And I should see "Main application site"
 
     Scenario: Display errors for invalid data in new form
-        Given an authenticated admin
-        And I am on the services index page
+        Given I am on the services index page
         When I follow "New Service"
         And I fill in "service[title]" with ""
         And I fill in "service[description]" with "Main application site"
@@ -37,8 +37,7 @@ Feature: Manage services
         And I should see "Title can't be blank"
 
     Scenario: Edit a service
-        Given an authenticated admin
-        And a service with title "cubicleapps.com - main" and description "Main application site"
+        Given a service with title "cubicleapps.com - main" and description "Main application site"
         And I am on the services index page
         When I follow "Edit cubicleapps.com - main"
         Then I should see "Back"
@@ -48,3 +47,12 @@ Feature: Manage services
         Then I should see "The service was updated successfully."
         And I should see "cubicleapps.com"
         And I should see "Main web service"
+
+    Scenario: Destroy a service
+        Given a service with title "cubicleapps.com - main" and description "Main application site"
+        And I am on the services index page
+        When I follow "Destroy cubicleapps.com - main"
+        Then I should see "The service was destroyed successfully."
+        And I should not see "cubicleapps.com - main"
+        And I should not see "Main application site"
+
