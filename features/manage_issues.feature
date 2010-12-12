@@ -3,14 +3,49 @@ Feature: Manage issues
     As an authenticated admin
     I want to view, create, edit or delete issues
 
-    Scenario: List issues (public view)
+    Scenario Outline: List issues public view
         Given a service with title "cubicleapps.com - main" and description "Main application site"
         And a current issue "Hardware Failure" with severity status "4" for "cubicleapps.com - main"
+        And the above issue has description "Migrating to the cloud"
+        And the above issue has been reported on "2010-12-11 14:03:00 UTC"
+        And the above issue has an estimate of "2 hours"  
+        And the above issue has resolved status "<resolved>" and time up "<time up>"
         When I go to the issues index page
         Then I should see "cubicleapps.com - main"
         And I should see "Hardware Failure"
+        And I should see "<status>" within "<color>"
         And I should see "Severity: 4"
-        And I should see "Resolved: false"
+        And I should see "<resolved value>"
+        And I should see "2010-12-11 14:03:00 UTC"
+        And I should see "2 hours"
+        And I should see "<time up>"
+        And I should see "Migrating to the cloud"
+        And I should not see "New Issue"
+        And I follow "Back to Dashboard"
+        Then I should see "UP Status Dashboard"
+
+        Examples:
+            | resolved | time up                 | status     | color  | resolved value  |
+            | true     | 2010-12-11 14:35:00 UTC | (resolved) | .green | Resolved: true  |
+            | false    |                         | (pending)  | .red   | Resolved: false |
+
+    Scenario: List issues (resolved issues only, just for demo purposes, see outline above to be removed)
+        Given a service with title "cubicleapps.com - main" and description "Main application site"
+        And a current issue "Hardware Failure" with severity status "4" for "cubicleapps.com - main"
+        And the above issue has description "Migrating to the cloud"
+        And the above issue has been reported on "2010-12-11 14:03:00 UTC"
+        And the above issue has an estimate of "2 hours"  
+        And the above issue has resolved status "true" and time up "2010-12-11 14:03:00 UTC"
+        When I go to the issues index page
+        Then I should see "cubicleapps.com - main"
+        And I should see "Hardware Failure"
+        And I should see "(resolved)" within ".green"
+        And I should see "Severity: 4"
+        And I should see "Resolved: true"
+        And I should see "2010-12-11 14:03:00 UTC"
+        And I should see "2 hours"
+        And I should see "2010-12-11 14:03:00 UTC"
+        And I should see "Migrating to the cloud"
         And I should not see "New Issue"
         And I follow "Back to Dashboard"
         Then I should see "UP Status Dashboard"

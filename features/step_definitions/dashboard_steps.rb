@@ -17,8 +17,12 @@ Given /^no pending issues$/ do
 end
 
 Given /^a current issue "([^"]*)" with severity status "([^"]*)" for "([^"]*)"$/ do |issue, severity, service|
-  Issue.create(
-    :service_id => Service.where(:title => service).first.id, 
+  service = Service.where(:title => service) 
+  unless service
+    Given %{a service with title "#{service}" and description "Main application site"}
+  end
+  @issue = Issue.create(
+    :service_id => service.first.id, 
     :title => issue, 
     :severity => severity, 
     :resolved => false,
@@ -34,5 +38,39 @@ Given /^a number of "([^"]*)" pending issues$/ do |pending_issues|
     Given %{a current issue "Hardware Failure no #{iterator}" with severity status "4" for "cubicleapps.com - main"}
     iterator += 1
   end
+end
+
+Given /^the above issue has been reported on "([^"]*)"$/ do |time_down|
+  unless @issue
+    Given %{a number of "1" pending issues}
+  end
+  @issue.time_down = time_down
+  @issue.save
+end
+
+Given /^the above issue has an estimate of "([^"]*)"$/ do |estimate|
+  unless @issue
+    Given %{a number of "1" pending issues}
+  end
+  @issue.estimate = estimate
+  @issue.save
+end
+
+Given /^the above issue has resolved status "([^"]*)" and time up "([^"]*)"$/ do |resolved, time_up|
+  unless @issue
+    Given %{a number of "1" pending issues}
+  end
+  resolved = true if resolved == "true"
+  @issue.resolved = resolved
+  @issue.time_up = time_up if resolved
+  @issue.save
+end
+
+Given /^the above issue has description "([^"]*)"$/ do |description|
+  unless @issue
+    Given %{a number of "1" pending issues}
+  end
+  @issue.description = description
+  @issue.save
 end
 
