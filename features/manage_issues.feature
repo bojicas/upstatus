@@ -81,3 +81,14 @@ Feature: Manage issues
         And select "49" from "issue_time_up_5i"
         And I press "Create Issue"
         Then I should see "The issue was created successfully."
+
+     Scenario: Display errors for invalid data in new form
+        Given an authenticated admin
+        And a service with title "cubicleapps.com - main" and description "Main application site"
+        And I am on the issues index page
+        When I follow "New Issue"
+        And I fill in "issue_title" with ""
+        And I press "Create Issue"
+        Then I should see "New Issue" 
+        And I should see "1 error prohibited this issue from being saved:"
+        And I should see "Title can't be blank"  
