@@ -1,29 +1,28 @@
-%h1 UP Status Dashboard
+%h1.up_status UP Status Dashboard
 
-- if Admin.should_register
-  You should sign up for an admim account:
-  =link_to "sign up form", '/admins/sign_up'
+%div.content
+  - if Admin.should_register
+    You should sign up for an admim account:
+    =link_to "sign up form", '/admins/sign_up'
 
-%h3 Status:
+  %h3 Status:
 
-%ul
-  - @services.each do |service|
-    %li{ :class => "#{status_color(service)}_status" }
-      = service.title
-      %span{:class => status_color(service)}
-        =status(service)
+  %ul
+    - @services.each do |service|
+      %li{ :class => "#{status_color(service)}_status" }
+        = service.title
+        %span{:class => status_color(service)}
+          =status(service)
 
-=link_to "History - Issues List", issues_path
+  =link_to "History - Issues List", issues_path
 
-%hr
+%div.content
+  %h3 Services description:
 
-
-%h3 Services description:
-
-%ul
-  - @services.each do |service|
-    %li
-      = service.title
-      %ul
-        %li.details
-          = service.description
+  %ul
+    - @services.each do |service|
+      %li
+        = service.title
+        %ul
+          %li.details
+            = service.description

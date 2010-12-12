@@ -1,26 +1,27 @@
-%h3 Issues List
+%h1.up_status UP Status - Issues List
 
-%ul
-  -@issues.each do |issue|
-    %li{ :class => "severity_#{issue.severity}" }
-      %b
-        =issue.service.title
-        *
-        =issue.title
-        -if issue.resolved
-          %span.green="(resolved)"
-        -else
-          %span.red="(pending)"
-      =link_to "Edit", edit_issue_path(issue) if current_admin
-      %ul.details
-        %li.details
-          ="Severity: #{issue.severity} * reported on #{issue.time_down} * estimate #{issue.estimate}"
-        %li.details
-          ="Resolved: #{issue.resolved}"
-          ="on #{issue.time_up}" if issue.resolved
-        %li.details
-          ="Description: #{issue.description}"
+-@issues.each do |issue|
+  %div.content
+    %ul
+      %li{ :class => "severity_#{issue.severity}" }
+        %b
+          =issue.service.title
+          *
+          =issue.title
+          -if issue.resolved
+            %span.green="(resolved)"
+          -else
+            %span.red="(pending)"
+        =link_to "Edit", edit_issue_path(issue) if current_admin
+        %ul.details
+          %li.details
+            ="Severity: #{issue.severity} * reported on #{issue.time_down} * estimate #{issue.estimate}"
+          %li.details
+            ="Resolved: #{issue.resolved}"
+            ="on #{issue.time_up}" if issue.resolved
+          %li.details
+            ="Description: #{issue.description}"
 
-=link_to "Back to Dashboard", root_path
-
-=link_to "New Issue", new_issue_path if current_admin
+%div.link_bar
+  =link_to "Back to Dashboard", root_path
+  =link_to "New Issue", new_issue_path if current_admin

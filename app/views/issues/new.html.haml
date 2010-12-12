@@ -1,5 +1,8 @@
-%h3 New Issue
+%h1.up_status UP Status - New Issue
 
-= render :partial => 'form'
+%div.content
 
-=link_to "Back", issues_path
+  = render :partial => 'form'
+
+%div.link_bar
+  = link_to "Back", issues_path

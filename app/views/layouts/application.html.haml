@@ -7,11 +7,9 @@
     =csrf_meta_tag
 
   %body
-    %h1.up_status UP Status
 
     = render :partial => 'shared/flashes'
 
     = render :partial => 'shared/admin_link_bar'
 
-    %div.content
-      =yield
+    =yield

@@ -1,14 +1,15 @@
-%h3 Services List
+%h1.up_status UP Status - Services List
 
-%ul
-  - @services.each do |service|
-    %li
-      =service.title
-      =link_to "Edit", edit_service_path(service), :title => "Edit #{service.title}"
-      =link_to 'Destroy', service, :confirm => 'Are you sure?', :method => :delete, :title => "Destroy #{service.title}"
-      %ul.details
-        %li
-          =service.description
+- @services.each do |service|
+  %div.content
+    %ul
+      %li
+        =service.title
+        =link_to "Edit", edit_service_path(service), :title => "Edit #{service.title}"
+        =link_to 'Destroy', service, :confirm => 'Are you sure?', :method => :delete, :title => "Destroy #{service.title}"
+        %ul.details
+          %li
+            =service.description
 
-%p
+%div.link_bar
   =link_to "New Service", new_service_path

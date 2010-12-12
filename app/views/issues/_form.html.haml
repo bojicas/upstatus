@@ -3,7 +3,7 @@
 
   %div.label
     =f.label :service_id
-  %div.filed
+  %div.field
     =f.select :service_id, Service.all.collect {|s| [ s.title, s.id ] }
 
   %div.label
@@ -41,6 +41,8 @@
   %div.field
     =f.datetime_select :time_up
 
-  %div#submit
+  %div.label
+    &nbsp;
+  %div.field
     = f.submit
 
