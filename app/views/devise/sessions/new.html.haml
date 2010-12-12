@@ -2,19 +2,20 @@
 
 %div.content
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-    %p
-      %div.label
-        =f.label :email
-      %div.field
-        =f.text_field :email
+    
+    %div.label
+      =f.label :email
+    %div.field
+      =f.text_field :email
 
-    %p
-      %div.label
-        =f.label :password
-      %div.field
-        =f.password_field :password 
+    %div.label
+      =f.label :password
+    %div.field
+      =f.password_field :password 
 
-    %p
+    %div.label
+      &nbsp;
+    %div.field
       = f.submit "Sign in"
 
 %div.link_bar
