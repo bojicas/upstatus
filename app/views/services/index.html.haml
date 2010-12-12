@@ -6,7 +6,7 @@
       =service.title
       =link_to "Edit", edit_service_path(service), :title => "Edit #{service.title}"
       =link_to 'Destroy', service, :confirm => 'Are you sure?', :method => :delete, :title => "Destroy #{service.title}"
-      %ul
+      %ul.details
         %li
           =service.description
 
