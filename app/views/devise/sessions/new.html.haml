@@ -1,4 +1,7 @@
-%h1.up_status UP Status - Sign in
+%h1.up_status
+  UP Status
+  %span.title
+    Sign in
 
 %div.content
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|

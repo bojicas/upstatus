@@ -1,4 +1,7 @@
-%h1.up_status UP Status Dashboard
+%h1.up_status 
+  UP Status
+  %span.title
+    Dashboard
 
 %div.content
   - if Admin.should_register
@@ -14,7 +17,8 @@
         %span{:class => status_color(service)}
           =status(service)
 
-  =link_to "History - Issues List", issues_path
+  %div.link
+    =link_to "History - Issues List", issues_path
 
 %div.content
   %h3 Services description:
