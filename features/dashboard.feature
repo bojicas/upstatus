@@ -19,7 +19,7 @@ Feature: Dashboard
         Given a service with title "cubicleapps.com - main" and description "Main application site"
         And no pending issues
         When I go to the dashboard page
-        Then I should see "cubicleapps.com - main"
+        Then I should see "cubicleapps.com - main" within ".green_status"
         And I should see "Main application site" 
         And I should see "(UP)" within ".green"
         And I follow "History - Issues List"
@@ -29,7 +29,7 @@ Feature: Dashboard
         Given a service with title "cubicleapps.com - main" and description "Main application site"
         And a current issue "Hardware Failure" with severity status "4" for "cubicleapps.com - main"
         When I go to the dashboard page
-        Then I should see "cubicleapps.com - main"
+        Then I should see "cubicleapps.com - main" within ".red_status"
         And I should see "Main application site" 
         And I should see "(DOWN - 1 issue)" within ".red"
         And I follow "History - Issues List"

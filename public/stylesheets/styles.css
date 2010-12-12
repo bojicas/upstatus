@@ -51,4 +51,34 @@ body {
 .details {
   font-size: 13px;
   color: gray;
+  list-style-type: none;
+  list-style-image: none;
+}
+
+.severity_1 {
+  list-style-image: url(/images/severity_1.png);
+}
+
+.severity_2 {
+  list-style-image: url(/images/severity_2.png);
+}
+
+.severity_3 {
+  list-style-image: url(/images/severity_3.png);
+}
+
+.severity_4 {
+  list-style-image: url(/images/severity_4.png);
+}
+
+.severity_5 {
+  list-style-image: url(/images/severity_5.png);
+}
+
+.red_status {
+  list-style-image: url(/images/red_status.png);
+}
+
+.green_status {
+  list-style-image: url(/images/green_status.png);
 }

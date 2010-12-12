@@ -2,7 +2,7 @@
 
 %ul
   -@issues.each do |issue|
-    %li
+    %li{ :class => "severity_#{issue.severity}" }
       %b
         =issue.service.title
         *
@@ -13,12 +13,12 @@
           %span.red="(pending)"
       =link_to "Edit", edit_issue_path(issue) if current_admin
       %ul.details
-        %li
+        %li.details
           ="Severity: #{issue.severity} * reported on #{issue.time_down} * estimate #{issue.estimate}"
-        %li
+        %li.details
           ="Resolved: #{issue.resolved}"
           ="on #{issue.time_up}" if issue.resolved
-        %li
+        %li.details
           ="Description: #{issue.description}"
 
 =link_to "Back to Dashboard", root_path
