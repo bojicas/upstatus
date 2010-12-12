@@ -33,14 +33,13 @@ Feature: Manage services
         And I fill in "service[description]" with "Main application site"
         And I press "Create Service"
         Then I should see "New Service" 
-        And I should see "1 error prohibited this service from being saved:"
+        And I should see "1 error prohibited this item from being saved:"
         And I should see "Title can't be blank"
 
     Scenario: Edit a service
         Given a service with title "cubicleapps.com - main" and description "Main application site"
         And I am on the services index page
         When I follow "Edit cubicleapps.com - main"
-        #When I go to the "cubicleapps.com - main" edit service page
         Then I should see "Back"
         And I fill in "service[title]" with "cubicleapps.com"
         And I fill in "service[description]" with "Main web service"

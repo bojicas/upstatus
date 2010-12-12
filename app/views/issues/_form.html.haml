@@ -1,0 +1,46 @@
+=form_for(@issue) do |f|
+  = render :partial => 'shared/form_error_messages', :locals => { :item => @issue }
+
+  %div.label
+    =f.label :service_id
+  %div.filed
+    =f.select :service_id, Service.all.collect {|s| [ s.title, s.id ] }
+
+  %div.label
+    =f.label :title 
+  %div.field
+    =f.text_field :title
+
+  %div.label
+    =f.label :severity 
+  %div.field
+    =f.select :severity, Issue::SEVERITY
+
+  %div.label
+    =f.label :description 
+  %div.field
+    =f.text_area :description, :rows => 2
+    
+  %div.label
+    =f.label :time_down 
+  %div.field
+    =f.datetime_select :time_down
+
+  %div.label
+    =f.label :estimate 
+  %div.field
+    =f.text_field :estimate
+
+  %div.label
+    =f.label :resolved 
+  %div.field
+    =f.check_box :resolved
+
+  %div.label
+    =f.label :time_up 
+  %div.field
+    =f.datetime_select :time_up
+
+  %div#submit
+    = f.submit
+

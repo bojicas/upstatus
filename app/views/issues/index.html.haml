@@ -11,6 +11,7 @@
           %span.green="(resolved)"
         -else
           %span.red="(pending)"
+      =link_to "Edit", edit_issue_path(issue) if current_admin
       %ul.details
         %li
           ="Severity: #{issue.severity} * reported on #{issue.time_down} * estimate #{issue.estimate}"

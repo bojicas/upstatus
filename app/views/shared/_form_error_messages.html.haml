@@ -1,0 +1,7 @@
+-if item.errors.any?
+  %div#errorExplanation
+    %h3 #{pluralize(item.errors.count, "error")} prohibited this item from being saved:
+  %ul
+    -item.errors.full_messages.each do |msg|
+      %li
+        =msg

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe IssuesController do
 
   describe "access control" do
-    [:new, :create].each do |action|
+    [:new, :create, :edit, :update].each do |action|
       it "requires admin to be logged in for action #{action}" do
         get action, :id => 1
         flash[:alert].should == "You need to sign in or sign up before continuing."
@@ -16,6 +16,7 @@ describe IssuesController do
   describe "actions" do
     before do
       login_admin
+      create_service
     end
 
     def login_admin
@@ -25,6 +26,13 @@ describe IssuesController do
         :password_confirmation => "secretpass"
       )
       sign_in @admin
+    end
+
+    def create_service
+      Service.create(
+        :id => "1",
+        :title => "cubicleapps.com - main" 
+      ) 
     end
 
     describe "GET 'index'" do
@@ -78,25 +86,22 @@ describe IssuesController do
 
     describe "POST 'create'" do
       before do
-        Service.create(
-          :id => "1",
-          :title => "cubicleapps.com - main" 
-        ) 
         @issue = mock_model(Issue).as_null_object
         Issue.stub(:new).and_return(@issue)
       end
 
       it "creates a new issue" do
-
         Issue.should_receive(:new).with(
           "service_id" => "1",
           "title" => "Hardware Failure", 
-          "resolved" => false
+          "resolved" => false,
+          "time_up" => "2010-12-12 07:28:15"
         ).and_return(@issue) 
         post :create, :issue => { 
           "service_id" => "1",
           "title" => "Hardware Failure", 
-          "resolved" => false
+          "resolved" => false,
+          "time_up" => "2010-12-12 07:28:15"
         }
       end
       context "when the issue saves successfully" do
@@ -127,6 +132,69 @@ describe IssuesController do
       end
     end
 
-                           
+    describe "GET 'edit'" do
+      before do
+        @issue = mock_model(Issue)
+        Issue.stub!(:find).with("1").and_return(@issue)
+      end
+      def do_get
+        get :edit, :id => "1"
+      end
+
+      it "renders new template" do
+        do_get
+        response.should render_template(:edit)
+      end
+      it "intializes issue with found record" do
+        Issue.should_receive(:find).with("1").and_return(@issue)
+        do_get
+      end
+      it "assigns issue for the view" do
+        do_get
+        assigns[:issue].should == @issue
+      end
+    end
+    
+    describe "POST 'update'" do
+      before do
+        @issue = mock_model(Issue, :update_attributes => true)
+        Issue.stub!(:find).with("1").and_return(@issue)
+      end
+
+
+      it "finds issue to update" do
+        Issue.should_receive(:find).with("1").and_return(@issue)
+        post :update, :id => "1", :issue => { :title => "Maintenance" } 
+      end                
+
+      context "when the issue saves successfully" do
+        before do
+          @issue.stub(:update_attributes).and_return(true)
+        end
+        it "sets a flash[:notice] message" do
+          post :update, :id => "1"
+          flash[:notice].should eq("The issue was updated successfully.")
+        end
+        it "redirects to issues index" do
+          post :update, :id => "1"
+          response.should redirect_to(:action => :index)
+        end
+      end
+      context "when the issue fails to save" do
+        before do
+          @issue.stub(:update_attributes).and_return(false)
+        end
+        it "assigns @issue for the edit view" do
+          post :update, :id => "1"
+          assigns[:issue].should eq(@issue)
+        end
+        it "renders the edit template" do
+          post :update, :id => "1"
+          response.should render_template(:edit)
+        end
+      end
+    end
+
+
   end
 end

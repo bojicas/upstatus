@@ -3,11 +3,15 @@ class Issue < ActiveRecord::Base
 
   SEVERITY = [ 1, 2, 3, 4, 5 ]
 
+  before_validation :reset_time_up_if_not_resoved
+
   validates :service_id, :presence => true, :reference_service => true   
   validates :title, :presence => true
   validates :severity, :presence => true, :inclusion => SEVERITY
 
-  def self.current_issues
-    self.where(:resolved => false)
+  scope :current_issues, where(:resolved => false)
+
+  def reset_time_up_if_not_resoved
+    self.time_up = nil unless self.resolved
   end
 end

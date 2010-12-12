@@ -18,4 +18,18 @@ class IssuesController < ApplicationController
       render :action => "new"
     end
   end
+
+  def edit
+    @issue = Issue.find(params[:id])
+  end
+
+  def update
+    @issue = Issue.find(params[:id])
+    if @issue.update_attributes(params[:issue])
+      flash[:notice] = "The issue was updated successfully."
+      redirect_to :action => :index
+    else
+      render :action => :edit
+    end
+  end
 end

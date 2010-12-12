@@ -15,8 +15,8 @@ describe Issue do
       :description => "The harddisk array is down. Migrating to the cloud services.",
       #:time_down => DateTime.now - 2.hours,
       #:estimate => "2h",
-      :resolved => false
-      #:time_up => DateTime.now
+      :resolved => false,
+      :time_up => "2010-12-11 09:55:38"
     )
   end
 
@@ -47,5 +47,10 @@ describe Issue do
   it "is not valid when severity is more than 5" do
     @issue.severity = 6
     @issue.should_not be_valid
+  end
+
+  it "is not valid to have time up when issue is not resolved" do
+    @issue.save
+    @issue.time_up.should be_nil
   end
 end

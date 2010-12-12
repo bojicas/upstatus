@@ -1,11 +1,6 @@
 =form_for(@service) do |f|
-  -if @service.errors.any?
-    %div#errorExplanation
-      %h3 #{pluralize(@service.errors.count, "error")} prohibited this service from being saved:
-    %ul
-      -@service.errors.full_messages.each do |msg|
-        %li
-          =msg
+
+  = render :partial => 'shared/form_error_messages', :locals => { :item => @service }
 
   %div.label
     =f.label :title
