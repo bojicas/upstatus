@@ -15,7 +15,6 @@ Feature: Manage issues
         And I should see "Hardware Failure"
         And I should see "<status>" within "<color>"
         And I should see "Severity: <severity>"
-        And I should see "<resolved value>"
         And I should see "2010-12-11 14:03:00 UTC"
         And I should see "2 hours"
         And I should see "<time up>"
@@ -25,12 +24,12 @@ Feature: Manage issues
         Then I should see "UP Status Dashboard"
 
         Examples:
-            | resolved | time up                 | severity | status     | color  | resolved value  |
-            | true     | 2010-12-11 14:35:00 UTC | 1        | (resolved) | .green | Resolved: true  |
-            | false    |                         | 2        | (pending)  | .red   | Resolved: false |
-            | true     | 2010-12-11 14:35:00 UTC | 3        | (resolved) | .green | Resolved: true  |
-            | false    |                         | 4        | (pending)  | .red   | Resolved: false |
-            | true     | 2010-12-11 14:35:00 UTC | 5        | (resolved) | .green | Resolved: true  |
+            | resolved | time up                 | severity | status   | color  |
+            | true     | 2010-12-11 14:35:00 UTC | 1        | Resolved | .green |
+            | false    |                         | 2        | Pending  | .red   |
+            | true     | 2010-12-11 14:35:00 UTC | 3        | Resolved | .green |
+            | false    |                         | 4        | Pending  | .red   |
+            | true     | 2010-12-11 14:35:00 UTC | 5        | Resolved | .green |
 
     Scenario: List issues (resolved issues only, just for demo purposes, see outline above to be removed)
         Given a service with title "cubicleapps.com - main" and description "Main application site"
@@ -42,9 +41,8 @@ Feature: Manage issues
         When I go to the issues index page
         Then I should see "cubicleapps.com - main"
         And I should see "Hardware Failure"
-        And I should see "(resolved)" within ".green"
+        And I should see "Resolved" within ".green"
         And I should see "Severity: 4"
-        And I should see "Resolved: true"
         And I should see "2010-12-11 14:03:00 UTC"
         And I should see "2 hours"
         And I should see "2010-12-11 14:03:00 UTC"
