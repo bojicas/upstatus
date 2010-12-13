@@ -8,6 +8,7 @@
     %ul
       %li
         =service.title
+        &nbsp;
         =link_to image_tag("/images/edit.png", :border => 0), edit_service_path(service), :title => "Edit #{service.title}"
         =link_to image_tag("/images/trash.png", :border => 0), service, :confirm => 'Are you sure?', :method => :delete, :title => "Destroy #{service.title}"
         %ul.details

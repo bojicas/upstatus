@@ -2,12 +2,11 @@
   You should sign up for an admim account:
   =link_to "sign up form", '/admins/sign_up'
 
-%ul
-  - @services.each do |service|
-    %li{ :class => "#{status_color(service)}_status" }
-      = service.title
-      %span{:class => status_color(service)}
-        =#status(service)
+- @services.each do |service|
+  %div{ :class => "#{status_color(service)}_status" }
+    = service.title
+    %span{:class => status_color(service)}
+      =#status(service)
 
 %div.link
   =link_to "History - Issues List", issues_path

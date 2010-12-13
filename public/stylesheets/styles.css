@@ -101,13 +101,23 @@ a {
 }
 
 .red_status {
-  list-style-image: url(/images/red_status.png);
-  padding: 4px;
+  line-height: 25px;
+  font-size: 18px;
+  background: url(/images/red_status.png) no-repeat 0px 0px transparent;
+  list-style-type: none;
+  margin: 0 0 0 12px;
+  padding: 0px 0px 5px 34px;
+  vertical-align: middle;
 }
 
 .green_status {
-  list-style-image: url(/images/green_status.png);
-  padding: 4px;
+  line-height: 25px;
+  font-size: 18px;
+  background: url(/images/green_status.png) no-repeat 0px 0px transparent;
+  list-style-type: none;
+  margin: 0 0 0 12px;
+  padding: 0px 0px 5px 34px;
+  vertical-align: middle;
 }
 
 .label {
