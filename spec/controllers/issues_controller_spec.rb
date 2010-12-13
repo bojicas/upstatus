@@ -38,7 +38,7 @@ describe IssuesController do
     describe "GET 'index'" do
       before do
         @issues = mock_model(Issue)
-        Issue.stub(:all).and_return(@issues)
+        Issue.stub(:ordered).and_return(@issues)
       end
       def do_get
         get 'index'
@@ -52,7 +52,7 @@ describe IssuesController do
         response.should render_template(:index)
       end
       it "finds all issues" do
-        Issue.should_receive(:all).and_return(@issues)
+        Issue.should_receive(:ordered).and_return(@issues)
         do_get
       end
       it "assigns found issues for the view" do

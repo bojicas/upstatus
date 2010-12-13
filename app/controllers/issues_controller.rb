@@ -2,7 +2,7 @@ class IssuesController < ApplicationController
   before_filter :authenticate_admin!, :except => [:index]
 
   def index
-    @issues = Issue.all
+    @issues = Issue.ordered
   end
 
   def new

@@ -9,7 +9,8 @@ class Issue < ActiveRecord::Base
   validates :title, :presence => true
   validates :severity, :presence => true, :inclusion => SEVERITY
 
-  scope :current_issues, where(:resolved => false)
+  scope :current_issues, where(:resolved => false).order("time_down desc")
+  scope :ordered, order("time_down desc")
 
   def reset_time_up_if_not_resoved
     self.time_up = nil unless self.resolved

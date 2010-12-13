@@ -18,7 +18,7 @@ a {
   color: #666699;
 }
 
-.content, .admin_link_bar, .link_bar, .notice, .alert {
+.content, .admin_link_bar, .link_bar, .back, .notice, .alert {
   margin: 1.25em auto auto auto;
   padding: 1em;
   width: 750px;
@@ -31,6 +31,13 @@ a {
 
 .link_bar, .admin_link_bar, .notice, .alert {
   background-color: #2b2b2b;
+}
+
+
+.back {
+  background-color: #1c1c1c;
+  border: none;
+  color: #2b2b2b;
 }
 
 .admin_link_bar ul {

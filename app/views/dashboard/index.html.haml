@@ -3,25 +3,30 @@
   %span.title
     Dashboard
 
+%h3.up_status.title Status:
 %div.content
   - if Admin.should_register
     You should sign up for an admim account:
     =link_to "sign up form", '/admins/sign_up'
 
-  %h3 Status:
 
   %ul
     - @services.each do |service|
       %li{ :class => "#{status_color(service)}_status" }
         = service.title
         %span{:class => status_color(service)}
-          =status(service)
+          =#status(service)
 
   %div.link
     =link_to "History - Issues List", issues_path
 
+%h3.up_status.title Current Issues
 %div.content
-  %h3 Services description:
+  = render :partial => 'current_issues_list'
+
+
+%h3.up_status.title Services description:
+%div.content
 
   %ul
     - @services.each do |service|
