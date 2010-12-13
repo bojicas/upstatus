@@ -13,9 +13,9 @@
         =link_to "Edit", edit_issue_path(issue) if current_admin
         %ul.details
           %li.details
-            ="Severity: #{issue.severity} * reported on #{issue.time_down} * estimate #{issue.estimate}"
+            ="Severity: #{issue.severity} * reported #{time_ago_in_words(issue.time_down)} ago, on #{issue.time_down} * estimate #{issue.estimate}"
           %li.details
-            ="Resolved on #{issue.time_up}" if issue.resolved
+            ="Resolved #{time_ago_in_words(issue.time_up)} ago, on #{issue.time_up}" if issue.resolved
           %li.details
             <br />
             ="#{issue.description}" if issue.description
