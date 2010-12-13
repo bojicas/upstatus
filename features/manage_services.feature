@@ -10,8 +10,8 @@ Feature: Manage services
         Given a service with title "cubicleapps.com - main" and description "Main application site"
         When I go to the services index page
         Then I should see "cubicleapps.com - main"
-        And I should see "Edit"
-        And I should see "Destroy"
+        And I should see the link "Edit cubicleapps.com - main"
+        And I should see the link "Destroy cubicleapps.com - main"
         And I should see "Main application site"
         And I should see "New Service"
 

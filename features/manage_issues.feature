@@ -20,6 +20,8 @@ Feature: Manage issues
         And I should see "<time up>"
         And I should see "Migrating to the cloud"
         And I should not see "New Issue"
+        And I should not see the link "Edit"
+        And I should not see the link "Destroy"
         And I follow "Back to Dashboard"
         Then I should see "UP Status Dashboard"
 
@@ -48,6 +50,8 @@ Feature: Manage issues
         And I should see "2010-12-11 14:03:00 UTC"
         And I should see "Migrating to the cloud"
         And I should not see "New Issue"
+        And I should not see the link "Edit"
+        And I should not see the link "Destroy"
         And I follow "Back to Dashboard"
         Then I should see "UP Status Dashboard"
 
@@ -129,3 +133,17 @@ Feature: Manage issues
         Then I should see "The issue was updated successfully."
         And I should see "Issues List"
         And I should see "Hardware Failure"
+
+    Scenario Outline: Destroy an issue
+        Given an authenticated admin
+        And a service with title "cubicleapps.com - main" and description "Main application site"
+        And a current issue "Hardware Failure" with severity status "4" for "cubicleapps.com - main"
+        And I am on the <page> page
+        When I follow "Destroy"
+        Then I should see "The issue was destroyed successfully."
+        And I should not see "Hardware Failure"
+
+        Examples:
+            | page         |
+            | dashboard    |
+            | issues index |

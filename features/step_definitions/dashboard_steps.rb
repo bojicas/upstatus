@@ -74,3 +74,28 @@ Given /^the above issue has description "([^"]*)"$/ do |description|
   @issue.save
 end
 
+
+Then /^I should see the link "([^\"]*)"$/ do | link |
+  page.should have_xpath("//a[@title=\"#{link}\"]")
+end
+
+Then /^I should see the alt text "([^\"]*)"$/ do | alt_text |
+  page.should have_xpath("//img[@alt=\"#{alt_text}\"]")
+end
+
+Then /^I should see the image "([^"]*)"$/ do | image |
+  page.body.should include(image)
+end
+
+Then /^I should not see the link "([^\"]*)"$/ do | link |
+  page.should_not have_xpath("//a[@title=\"#{link}\"]")
+end
+
+Then /^I should not see the alt text "([^\"]*)"$/ do | alt_text |
+  page.should_not have_xpath("//img[@alt=\"#{alt_text}\"]")
+end
+
+Then /^I should not see the image "([^"]*)"$/ do | image |
+  page.body.should_not include(image)
+end
+

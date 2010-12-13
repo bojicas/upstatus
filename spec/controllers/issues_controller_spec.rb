@@ -3,7 +3,7 @@ require 'spec_helper'
 describe IssuesController do
 
   describe "access control" do
-    [:new, :create, :edit, :update].each do |action|
+    [:new, :create, :edit, :update, :destroy].each do |action|
       it "requires admin to be logged in for action #{action}" do
         get action, :id => 1
         flash[:alert].should == "You need to sign in or sign up before continuing."
@@ -195,6 +195,29 @@ describe IssuesController do
       end
     end
 
+    describe "DELETE 'destroy'" do
+      before do
+        @issue = mock_model(Issue)
+        Issue.stub!(:find).with("1").and_return(@issue)     
+      end
+      
+      it "finds the issue record to destroy" do
+        Issue.should_receive(:find).with("1").and_return(@issue)
+        delete :destroy, :id => "1"
+      end
+      it "destroys the issue" do
+        @issue.should_receive(:destroy).and_return(true)
+        delete :destroy, :id => "1"
+      end
+      it "redirects to Issue index" do
+        delete :destroy, :id => "1"
+        response.should redirect_to(:action => :index)
+      end
+      it "set a flash[:notice] message" do
+        delete :destroy, :id => "1"
+        flash[:notice].should eq("The issue was destroyed successfully.")
+      end
+    end                    
 
   end
 end

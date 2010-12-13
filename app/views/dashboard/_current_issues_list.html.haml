@@ -10,7 +10,8 @@
           =issue.service.title
           *
           =issue.title
-        =link_to "Edit", edit_issue_path(issue) if current_admin
+        =link_to image_tag("/images/edit.png", :border => 0, :alt => "Edit"), edit_issue_path(issue), :title => "Edit" if current_admin
+        =link_to image_tag("/images/trash.png", :border => 0, :alt => "Destroy"), issue, :confirm => 'Are you sure?', :method => :delete, :title => "Destroy" if current_admin
         %ul.details
           %li.details
             ="Severity: #{issue.severity} * reported #{time_ago_in_words(issue.time_down)} ago, on #{issue.time_down} * estimate #{issue.estimate}"

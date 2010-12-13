@@ -32,4 +32,11 @@ class IssuesController < ApplicationController
       render :action => :edit
     end
   end
+  
+  def destroy
+    issue = Issue.find(params[:id])
+    issue.destroy
+    redirect_to :action => :index
+    flash[:notice] = "The issue was destroyed successfully."
+  end     
 end

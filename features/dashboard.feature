@@ -40,7 +40,8 @@ Feature: Dashboard
         And I should see "2010-12-11 14:03:00 UTC" 
         And I should see "2 hours"
         And I should see "Migrating to the cloud" 
-        And I should not see "Edit"
+        And I should not see the link "Edit"
+        And I should not see the link "Destroy"
         And I follow "History - Issues List"
         Then I should see "Issues List"
 
@@ -58,17 +59,19 @@ Feature: Dashboard
             | 2              | .red_status   |
             | 5              | .red_status   |
 
-    Scenario: No edit links if no current issue
+    Scenario: No edit and destroy links if no current issue
         Given an authenticated admin
         And no pending issues
         When I go to the dashboard page
-        Then I should not see "Edit"
+        Then I should not see the link "Edit"
+        And I should not see the link "Destroy"
 
     Scenario: Show edit links if current issues
         Given an authenticated admin
         And a service with title "cubicleapps.com - main" and description "Main application site"
         And a current issue "Hardware Failure" with severity status "4" for "cubicleapps.com - main"
         When I go to the dashboard page
-        Then I should see "Edit"
+        Then I should see the link "Edit"
+        And I should see the link "Destroy"
         And I follow "Edit"
         Then I should see "Edit Issue"
