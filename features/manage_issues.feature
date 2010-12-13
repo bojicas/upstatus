@@ -22,6 +22,7 @@ Feature: Manage issues
         And I should not see "New Issue"
         And I should not see the link "Edit"
         And I should not see the link "Destroy"
+        And I should not see the link "Destroy"
         And I follow "Back to Dashboard"
         Then I should see "UP Status Dashboard"
 
