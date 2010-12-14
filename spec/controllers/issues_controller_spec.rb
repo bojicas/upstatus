@@ -20,12 +20,7 @@ describe IssuesController do
     end
 
     def login_admin
-      @admin = Admin.create(
-        :email => "admin@cubicleapps.com",
-        :password => "secretpass",
-        :password_confirmation => "secretpass"
-      )
-      sign_in @admin
+      sign_in Factory(:admin)
     end
 
     def create_service

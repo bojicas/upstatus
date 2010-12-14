@@ -1,5 +1,5 @@
 Given /^an admin "([^"]*)" with password "([^"]*)"$/ do |admin, password|
-  Admin.create(:email => admin, :password => password, :password_confirmation => password)
+  Factory(:admin, :email => admin, :password => password)
 end
 
 Given /^an authenticated admin$/ do

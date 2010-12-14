@@ -6,6 +6,7 @@ gem 'haml'
 gem 'devise'
 
 group :development, :test do
+  gem 'factory_girl_rails', '1.1.beta1'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'cucumber-rails'
