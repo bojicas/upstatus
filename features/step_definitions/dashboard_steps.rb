@@ -3,12 +3,12 @@ Given /^no admins$/ do
 end
 
 Given /^a service with title "([^"]*)" and description "([^"]*)"$/ do |title, description|
-  Service.create(:id => 1, :title => title, :description => description)
+  Factory.create(:service, :title => title, :description => description)
 end
 
 Given /^following services$/ do |table|
   table.hashes.each do |hash|  
-    Service.create(hash)
+    Factory(:service, hash)
   end  
 end
 
@@ -21,7 +21,7 @@ Given /^a current issue "([^"]*)" with severity status "([^"]*)" for "([^"]*)"$/
   unless service
     Given %{a service with title "#{service}" and description "Main application site"}
   end
-  @issue = Issue.create(
+  @issue = Factory(:issue,
     :service_id => service.first.id, 
     :title => issue, 
     :severity => severity, 
