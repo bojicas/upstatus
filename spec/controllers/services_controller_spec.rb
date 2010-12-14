@@ -18,12 +18,7 @@ describe ServicesController do
     end
 
     def login_admin
-      @admin = Admin.create(
-        :email => "admin@cubicleapps.com",
-        :password => "secretpass",
-        :password_confirmation => "secretpass"
-      )
-      sign_in @admin
+      sign_in Factory(:admin)
     end
 
     describe "GET 'index'" do
@@ -83,14 +78,8 @@ describe ServicesController do
       end
 
       it "creates a new service" do
-        Service.should_receive(:new).with(
-          "title" => "cubicleapps.com - main", 
-          "description" => "Main application site"
-        ).and_return(@service) 
-        post :create, :service => { 
-          "title" => "cubicleapps.com - main", 
-          "description" => "Main application site" 
-        }
+        Service.should_receive(:new).with("title" => "cubicleapps.com - main").and_return(@service)
+        post :create, :service => { "title" => "cubicleapps.com - main" }
       end
       context "when the service saves successfully" do
         before do

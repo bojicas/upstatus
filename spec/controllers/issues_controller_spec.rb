@@ -24,10 +24,7 @@ describe IssuesController do
     end
 
     def create_service
-      Service.create(
-        :id => "1",
-        :title => "cubicleapps.com - main" 
-      ) 
+      Factory(:service, :id => "1") 
     end
 
     describe "GET 'index'" do
