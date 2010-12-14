@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe Admin do
   before(:each) do
-    @admin = Admin.new(
-      :email => 'admin@cubicleapps.com',
-      :password => 'secretpass',
-      :password_confirmation => 'secretpass'
-    )
+    @admin = Factory.build(:admin)
   end
 
   it "is valid with valid attributes" do

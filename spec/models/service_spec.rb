@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Service do
   before(:each) do
-    @service = Service.new(:title => "cubicleapps.com - main", :description => "Main application site")
+    @service = Factory.build(:service)
   end
 
   it "is valid with valid attributes" do
